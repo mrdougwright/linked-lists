@@ -3,20 +3,20 @@ class Node:
         self.value = value
         self.next = None
 
-    def traverse_list(self):
-        print(self.value)
-        if self.next:
-            self.next.traverse_list()
+class LinkedList:
+    def __init__(self, values):
+        if not values:
+            return None
+        self.head = node = Node(values[0])
+        for num in values[1:]:
+            node.next = Node(num)
+            node = node.next
 
-def create_linked_list(values):
-    if not values:
-        return None
-    head = node = Node(values[0])
-    for num in values[1:]:
-        node.next = Node(num)
-        node = node.next
-    return head
+    def traverse(self):
+        node = self.head
+        while node:
+            print(node.value)
+            node = node.next
 
-
-head = create_linked_list([2,1,4,3,5])
-head.traverse_list()
+llist = LinkedList([2,1,4,3,5])
+llist.traverse()

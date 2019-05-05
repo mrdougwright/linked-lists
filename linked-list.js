@@ -3,24 +3,27 @@ class Node {
     this.value = value
     this.next = null
   }
+}
 
-  traverseList() {
-    console.log(this.value)
-    if (this.next) {
-      this.next.traverseList()
+class LinkedList {
+  constructor(values) {
+    if (values.length === 0) return null
+    let node = this.head = new Node(values.shift())
+    values.forEach((num) => {
+      node.next = new Node(num)
+      node = node.next
+    })
+    this.head
+  }
+
+  traverse() {
+    let node = this.head
+    while (node) {
+      console.log(node.value)
+      node = node.next
     }
   }
 }
 
-const createLinkedList = (values) => {
-  if (values.length === 0) return null
-  let head = node = new Node(values.shift())
-  values.forEach((num) => {
-    node.next = new Node(num)
-    node = node.next
-  })
-  return head
-}
-
-let head = createLinkedList([2,1,4,3,5])
-head.traverseList()
+let llist = new LinkedList([2,1,4,3,5])
+llist.traverse()

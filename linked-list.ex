@@ -1,29 +1,25 @@
 defmodule MyNode do
   defstruct [:value, next: nil]
-
-  def traverse_list(head) do
-    IO.puts(head.value)
-
-    if head.next do
-      traverse_list(head.next)
-    end
-  end
 end
 
-defmodule Create do
-  def linked_list([]), do: nil
+defmodule LinkedList do
+  def new([]), do: nil
+  def new([num | nil]), do: %MyNode{value: num}
 
-  def linked_list([num | nil]) do
-    %MyNode{value: num}
-  end
-
-  def linked_list([num | rest]) do
+  def new([num | rest]) do
     %MyNode{
       value: num,
-      next: linked_list(rest)
+      next: new(rest)
     }
+  end
+
+  def traverse(nil), do: nil
+
+  def traverse(node) do
+    IO.puts(node.value)
+    traverse(node.next)
   end
 end
 
-head = Create.linked_list([2, 1, 4, 3, 5])
-MyNode.traverse_list(head)
+llist = LinkedList.new([2, 1, 4, 3, 5])
+LinkedList.traverse(llist)
